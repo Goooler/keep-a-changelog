@@ -20,7 +20,7 @@ jobs:
           release_notes_file: RELEASE_NOTES.md
       - name: Create release
         run: |
-          git tag --list ${{ github.ref_name }} --format='%(contents)'
+          gh --version
           gh release create ${{ github.ref_name }} --notes-from-tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
