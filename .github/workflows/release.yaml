@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          # TODO: workaround for https://github.com/cli/cli/issues/9558.
+          # TODO: workaround for https://github.com/actions/checkout/issues/1467.
           ref: ${{ github.ref }}
       - name: Extract release notes
         uses: ffurrer2/extract-release-notes@v2
@@ -21,7 +21,7 @@ jobs:
           release_notes_file: RELEASE_NOTES.md
       - name: Create release
         run: |
-          # TODO: must declare title here to workaround for https://github.com/cli/cli/issues/9558.
+          # TODO: must declare --title here to workaround for https://github.com/cli/cli/issues/9563.
           gh release create ${{ github.ref_name }} --title ${{ github.ref_name }} --notes-from-tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
