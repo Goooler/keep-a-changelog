@@ -13,14 +13,14 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          # TODO: workaround for https://github.com/cli/cli/issues/9558.
+          ref: ${{ github.ref }}
       - name: Extract release notes
         uses: ffurrer2/extract-release-notes@v2
         with:
           release_notes_file: RELEASE_NOTES.md
       - name: Create release
         run: |
-          gh --version
           gh release create ${{ github.ref_name }} --notes-from-tag
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
